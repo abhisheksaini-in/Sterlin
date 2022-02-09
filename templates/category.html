@@ -1,0 +1,40 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %} {{cat.title}} {% endblock%}
+
+
+{% block content %} 
+
+<h1 class="text-3xl text-center pt-4 fw-bold text-red-700">{{cat.title}}</h1>
+
+<div class="container-lg mt-2">
+    {% for p in posts %}
+            <div class="row bg-dark text-light my-4 p-2">
+                <div class="col-sm-12 col-lg-7 ">
+                    <h6 class="text-warning fw-bold">{{p.cat}}</h6> 
+                    <h3 class="text-2xl pt-2"> {{p.title}}</h3>
+                    <p class="pt-3">{{p.content |truncatewords:45 |safe }} </p>
+                    <!-- <p><a class=" btn btn-outline-light m-4" href="/blog/{{p.url}}">Read More</a></p>  -->
+                    <button class="bg-white hover:bg-pink-700 text-dark font-bold m-4 py-1 px-2 rounded">
+                        <a class=" m-4" href="/blog/{{p.url}}">Read More</a>
+                    </button>
+                </div>
+
+                <div class="col-sm-12 col-lg-5">
+                    
+                    <img src="/media/{{p.image}}" class="img-fluid" alt="...">
+                
+                </div>
+            </div>
+
+            {% empty %}
+            <h1>No record Found!</h1>
+
+    {% endfor %}
+
+</div>
+
+
+{% endblock%}

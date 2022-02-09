@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %} Search Results {% endblock%}
+
+
+{% block content %} 
+
+
+
+<div class="container-lg mt-2">
+
+    {% if search|length < 1 %}
+    <div class="container">
+
+        <h1 class="text-2xl fw-600">No Results Found!</h1> <br>
+        <br/>
+        <hr class="bg-warning pt-1">
+    <h1 class="px-12 pt-3 fw-400 text-xl">Your search - <b>{{query}}</b> - did not match any Blog.</h1>
+
+<br/>
+<br/>
+    <h2>Suggestions:-</h2>
+
+    <ul class="px-10" style="list-style-type: circle; ">
+        <li>Make sure that all words are spelled correctly.</li>
+        <li>Try different keywords.</li>
+        <li>Try more general keywords</li>
+    </ul>
+    
+</div>
+
+    {% endif %}
+
+    
+    {% for sr in search %}
+    <div class="row bg-dark text-light my-4 p-2">
+        <div class="col-sm-12 col-lg-7 ">
+            <h6 class="text-warning fw-bold">{{sr.cat}}</h6> 
+            <h3 class="text-2xl pt-2"> {{sr.title}}</h3>
+            <p class="pt-3">{{sr.content |truncatewords:45 |safe }} </p>
+            <!-- <p><a class=" btn btn-outline-light m-4" href="/blog/{{p.url}}">Read More</a></p>  -->
+            <button class="bg-white hover:bg-pink-700 text-dark font-bold m-4 py-1 px-2 rounded">
+                <a class=" m-4" href="/blog/{{sr.url}}">Read More</a>
+              </button>
+        </div>
+
+        <div class="col-sm-12 col-lg-5">
+            
+            <img src="/media/{{sr.image}}" class="img-fluid" alt="...">
+        
+
+        </div>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+
+
+{% endblock%} 

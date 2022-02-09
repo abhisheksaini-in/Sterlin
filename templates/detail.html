@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+
+{% block title %} {{page.title}} {% endblock %}
+
+{% block content %}
+
+
+<div class="container-lg px-5">
+    
+
+       
+
+            <h1 class=" text-4xl text-bold pt-4 pb-4">{{page.title}}</h1>
+            <img  src="/media/{{page.image}}" class="img-fluid" alt="...">
+  
+            <section class="pt-4 text-justify">{{page.content | safe }}</section> 
+
+
+
+</div>
+
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-wrap w-full mb-20">
+        <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Recent Posts</h1>
+          <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+        </div>
+        <p class="lg:w-1/2 w-full leading-relaxed text-gray-500 text-xl">People Also Read </p>
+      </div>
+      <div class="flex flex-wrap -m-4">
+        {% for p in posts %}
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+          <div class="bg-gray-100 p-6 rounded-lg">
+            <a href="/blog/{{p.url}}"><img class="h-40 rounded w-full object-cover object-center mb-6" src="/media/{{p.image}}" alt="content"></a>
+            <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">{{p.cat}}</h3>
+            <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{p.title}}</h2>
+            <p class="leading-relaxed text-base">{{p.content |truncatewords:10 |safe }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+
+
+{% endblock %}
